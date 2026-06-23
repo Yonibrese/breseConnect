@@ -1,16 +1,22 @@
-"""
-ASGI config for breseConnect project.
-
-It exposes the ASGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/6.0/howto/deployment/asgi/
-"""
-
+# breseConnect/asgi.py
 import os
-
 from django.core.asgi import get_asgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'breseConnect.settings')
 
-application = get_asgi_application()
+# Initialize the standard Django ASGI application FIRST.
+django_asgi_app = get_asgi_application()
+
+# Safe to import channels routing components now
+from channels.routing import ProtocolTypeRouter, URLRouter
+import workspaces.routing 
+
+application = ProtocolTypeRouter({
+    # Traditional HTTP traffic
+    "http": django_asgi_app,
+    
+    # WebSocket traffic (Direct routing without session validation)
+    "websocket": URLRouter(
+        workspaces.routing.websocket_urlpatterns
+    ),
+})
