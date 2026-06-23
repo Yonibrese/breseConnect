@@ -1,0 +1,6 @@
+venv
+breseConnect/db.sqlite3
+breseConnect/workspaces/migrations
+breseConnect/accounts/migrations
+breseConnect/workspaces/__pycache__
+breseConnect/accounts/__pycache__
