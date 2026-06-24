@@ -4,3 +4,5 @@ breseConnect/workspaces/migrations
 breseConnect/accounts/migrations
 breseConnect/workspaces/__pycache__
 breseConnect/accounts/__pycache__
+breseConnect/breseConnect/__pycache__
+test_redis.py
