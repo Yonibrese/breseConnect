@@ -33,7 +33,8 @@ def login_user(request):
     user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
-        return Response({"detail": "Login successful.", "username" : username}, status=status.HTTP_200_OK)
+        serializer = UserSerializer(request.user)
+        return Response({"detail": "Login successful.", "user": serializer.data}, status=status.HTTP_200_OK)
     return Response({"detail": "Invalid credentials."}, status=status.HTTP_401_UNAUTHORIZED)
 
 @api_view(['POST'])
